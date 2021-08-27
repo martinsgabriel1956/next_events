@@ -1,34 +1,45 @@
-import Link from 'next/link';
+import Link from "next/link";
+
+import {
+  Container,
+  Content,
+  DateContainer,
+  Summary,
+  Address,
+  Actions,
+} from "./styles";
 
 export function EventItem(props) {
   const { title, image, date, location, id } = props;
 
-  const humanReadableDate = new Date(date).toLocaleDateString('pt-BR', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  })
+  let dateFormatted = new Date(date);
 
-  const formattedAddress = location.replace(', ', '\n');
+  const humanReadableDate = dateFormatted.toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
+  const formattedAddress = location.replace(", ", "\n");
   const exploreLink = `/events/${id}`;
 
   return (
-    <li>
-      <img src={`/${image}`}alt="" />
-      <div>
-        <h2>{title}</h2>
-        <div>
-          <time>{humanReadableDate}</time>
-        </div>
-        <div>
-          <address>{formattedAddress}</address>
-        </div>
-      </div>
-      <div>
-        <Link href={exploreLink}>Explore Event</Link>
-      </div>
-    </li>
+    <Container>
+      <img src={`/${image}`} alt="" />
+      <Content>
+        <Summary>
+          <h2>{title}</h2>
+          <DateContainer>
+            <time>{humanReadableDate}</time>
+          </DateContainer>
+          <Address>
+            <address>{formattedAddress}</address>
+          </Address>
+        </Summary>
+        <Actions>
+          <Link href={exploreLink}>Explore Event</Link>
+        </Actions>
+      </Content>
+    </Container>
   );
-};
-
-
+}

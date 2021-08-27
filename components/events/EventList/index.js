@@ -1,10 +1,12 @@
 import { EventItem } from "../EventItem";
 
+import { Container } from './styles';
+
 export function EventList(props) {
   const { events } = props;
 
   return (
-    <ul>
+    <Container>
       {events.map((event) => (
         <EventItem
           key={event.id}
@@ -15,6 +17,6 @@ export function EventList(props) {
           image={event.image}
         />
       ))}
-    </ul>
+    </Container>
   );
 }

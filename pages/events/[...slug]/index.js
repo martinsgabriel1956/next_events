@@ -1,5 +1,5 @@
-export function Slug() {
+export function AllEvents() {
   return (
-    <h1>Slug</h1>
+    <h1>AllEvents</h1>
   );
 }

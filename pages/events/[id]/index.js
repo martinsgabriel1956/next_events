@@ -1,5 +1,5 @@
-export function Id() {
+export function Event() {
   return (
-    <h1>Id</h1>
+    <h1>Event</h1>
   );
 }

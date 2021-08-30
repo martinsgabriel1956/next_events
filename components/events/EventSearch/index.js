@@ -1,19 +1,33 @@
+import { useRef } from "react";
+
 import { Container, Controls, Control, ButtonEvents } from "./styles";
 
 export function EventSearch(props) {
+  const yearRef = useRef();
+  const monthRef = useRef();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const year = yearRef.current.value;
+    const month = monthRef.current.value;
+
+    props.onSearch(year, month);
+  }
+
   return (
-    <Container>
+    <Container onSubmit={handleSubmit}>
       <Controls>
         <Control>
           <label htmlFor="year">Year</label>
-          <select id="year">
+          <select id="year" ref={yearRef}>
             <option value="2021">2021</option>
             <option value="2022">2022</option>
           </select>
         </Control>
         <Control>
           <label htmlFor="month">Month</label>
-          <select id="month">
+          <select id="month" ref={monthRef}>
             <option value="1">January</option>
             <option value="2">February</option>
             <option value="3">March</option>

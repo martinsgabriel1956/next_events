@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import {
   Container,
   Content,
@@ -7,7 +5,13 @@ import {
   Summary,
   Address,
   Actions,
+  IconContainer
 } from "./styles";
+
+import { Button } from "../../UI/Button";
+import { DateIcon } from "../../UI/icons/date-icon";
+import { ArrowRightIcon } from "../../UI/icons/arrow-right-icon";
+import { AddressIcon } from "../../UI/icons/address-icon";
 
 export function EventItem(props) {
   const { title, image, date, location, id } = props;
@@ -30,14 +34,21 @@ export function EventItem(props) {
         <Summary>
           <h2>{title}</h2>
           <DateContainer>
+            <DateIcon />
             <time>{humanReadableDate}</time>
           </DateContainer>
           <Address>
+            <AddressIcon />
             <address>{formattedAddress}</address>
           </Address>
         </Summary>
         <Actions>
-          <Link href={exploreLink}>Explore Event</Link>
+          <Button link={exploreLink}>
+            <span>Explore Event</span>
+            <IconContainer>
+              <ArrowRightIcon />
+            </IconContainer>
+          </Button>
         </Actions>
       </Content>
     </Container>

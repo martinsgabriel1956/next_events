@@ -89,7 +89,7 @@ export const Actions = styled.div`
   a {
     display: block;
 
-    & > span {
+    span {
       vertical-align: middle;
     }
   }
@@ -97,5 +97,17 @@ export const Actions = styled.div`
   @media (min-width: 768px) {
     flex-direction: row;
     justify-content: flex-end;
+  }
+`;
+
+export const IconContainer = styled.span`
+  margin-left: 0.5rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
   }
 `;

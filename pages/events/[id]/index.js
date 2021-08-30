@@ -1,9 +1,11 @@
 import { useRouter } from "next/router";
 
 import { getEventById } from "../../../dummy-data";
+
 import { EventSummary } from "../../../components/events/EventDetail/EventSummary";
 import { EventLogistics } from "../../../components/events/EventDetail/EventLogistics";
 import { EventContent } from "../../../components/events/EventDetail/EventContent";
+import { ErrorAlert } from "../../../components/UI/ErrorAlert";
 
 export default function Event() {
   const router = useRouter();
@@ -12,7 +14,11 @@ export default function Event() {
   const event = getEventById(id);
 
   if (!event) {
-    return <p>Event not found</p>;
+    return (
+      <ErrorAlert>
+        <p>Event not found</p>
+      </ErrorAlert>
+    );
   }
 
   const { title, date, location, image, description } = event;

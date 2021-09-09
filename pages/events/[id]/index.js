@@ -3,7 +3,7 @@ import { EventLogistics } from "../../../components/events/EventDetail/EventLogi
 import { EventContent } from "../../../components/events/EventDetail/EventContent";
 import { ErrorAlert } from "../../../components/UI/ErrorAlert";
 
-import { getEventById, getAllEvents } from '../../../helpers/api-util';
+import { getEventById, getFeaturedEvents } from '../../../helpers/api-util';
 
 export default function Event(props) {
   const event = props.selectedEvent;
@@ -43,17 +43,18 @@ export async function getStaticProps (ctx) {
   return {
     props: {
       selectedEvent: event
-    }
+    },
+    revalidate: 30
   }
 }
 
 export async function getStaticPaths () {
-  const events = await getAllEvents();
+  const events = await getFeaturedEvents();
 
   const paths = events.map(event => ({ params: { id: event.id } }));
 
   return {
     paths: paths,
-    fallback: false
+    fallback: 'blocking'
   };
 }

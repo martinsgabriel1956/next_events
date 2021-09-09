@@ -1,17 +1,12 @@
-import { useRouter } from "next/router";
-
-import { getEventById } from "../../../dummy-data";
-
 import { EventSummary } from "../../../components/events/EventDetail/EventSummary";
 import { EventLogistics } from "../../../components/events/EventDetail/EventLogistics";
 import { EventContent } from "../../../components/events/EventDetail/EventContent";
 import { ErrorAlert } from "../../../components/UI/ErrorAlert";
 
-export default function Event() {
-  const router = useRouter();
-  const { id } = router.query;
+import { getEventById, getAllEvents } from '../../../helpers/api-util';
 
-  const event = getEventById(id);
+export default function Event(props) {
+  const event = props.selectedEvent;
 
   if (!event) {
     return (
@@ -37,4 +32,28 @@ export default function Event() {
       </EventContent>
     </>
   );
+}
+
+
+export async function getStaticProps (ctx) {
+  const eventId = ctx.params.id;
+
+  const event = await getEventById(eventId);
+
+  return {
+    props: {
+      selectedEvent: event
+    }
+  }
+}
+
+export async function getStaticPaths () {
+  const events = await getAllEvents();
+
+  const paths = events.map(event => ({ params: { id: event.id } }));
+
+  return {
+    paths: paths,
+    fallback: false
+  };
 }
